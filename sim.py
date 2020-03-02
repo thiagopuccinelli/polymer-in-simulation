@@ -1,6 +1,13 @@
-import sys 
+import sys
+
+pathto = sys.argv[1]
+sys.path.append(pathto)
+
 from lib.polymer_simulation import * 
+
+
 import numpy as np 
+
 
 system_parameters = {
     "sigma0": 0.626,
@@ -13,7 +20,7 @@ system_parameters = {
     "filename": "rho_0_004_phi_hs_0_05"
 }
         
-simulation = PolymerSimulation(system_parameters)    
+simulation = PolymerSimulation(system_parameters,pathto)    
 
 # phi_hs = np.arange(0.005,0.31,0.01)
 # print(phi_hs)
