@@ -4,8 +4,9 @@ from random import randint
 
 class PolymerSimulation:
 
-    def __init__(self,system_parameters):
+    def __init__(self,system_parameters,pathto):
         self.system_parameters = system_parameters
+        self.pathto = pathto
         self.__initialize_system_parameters()
         self.__initialize_polymer_input()
         self.__initialize_lammps_script()
@@ -59,7 +60,7 @@ class PolymerSimulation:
             fdata.write('{}     distance between monomers (in reduced units)\n'.format(0.97))
             fdata.write('{}     no distance less than this from site i-1 to i+1 (reduced unit)\n'.format(1.02))
         
-        os.system("gfortran lib/chain.f -o chain")
+        os.system("gfortran "+str(self.pathto)+"/lib/chain.f -o chain")
         os.system("./chain < def.chain2 > "+str(self.filename)+"_poly_input.data")
         with open(str(self.filename)+"_poly_input.data", "r") as infile:
             lines = infile.readlines()
