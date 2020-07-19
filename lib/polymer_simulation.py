@@ -38,7 +38,7 @@ class PolymerSimulation:
         self.n_hs = int((6.*self.volume*self.phi_hs)/np.pi/(self.sigmaBB**3.))
         self.temperature = 1.0 
         self.gamma = 1.0 
-        self.time_step = 0.01 
+        self.time_step = 0.001 
         self.bin = 1.0 
         self.number_of_steps = 10000000
         self.number_of_steps_equilibration = 2000000
@@ -77,7 +77,7 @@ class PolymerSimulation:
             lmpScript.write("dimension 3 \n")
             lmpScript.write("atom_style  molecular \n")
             lmpScript.write("boundary   p p p \n\n")
-            lmpScript.write("neighbor 1.0  multi\n")
+            lmpScript.write("neighbor 4.0  multi\n")
             lmpScript.write("neigh_modify every 2 delay 10 check yes \n\n")
             lmpScript.write("read_data "+str(self.filename)+"_poly_input.data\n\n")
             lmpScript.write("region box block -{} {} -{} {} -{} {}\n".format(*(self.box_side/2.)*np.ones(6)))
@@ -106,7 +106,6 @@ class PolymerSimulation:
             lmpScript.write("unfix 1 \n")
             lmpScript.write("unfix equilibrate1 \n")
             lmpScript.write("unfix equilibrate2 \n")
-            lmpScript.write("minimize              0.00000001 0.000000001 10000 100000\n")
             lmpScript.write("# stop minimization \n")
             lmpScript.write("#########################################\n")
             lmpScript.write("pair_style hybrid/overlay lj/cut {}  lj/cut {}  lj/cut {}\n\n".format(self.cut11,self.cut12,self.cut22))
@@ -117,8 +116,9 @@ class PolymerSimulation:
             lmpScript.write("pair_coeff      2 2 lj/cut 3 {} {} {}\n".format(self.epsBB,self.sigmaBB,self.cut22))
             lmpScript.write("pair_modify  shift yes\n\n")
             lmpScript.write("bond_style  fene \n")
-            lmpScript.write("bond_coeff 1 30.0  2.25  1.0 1.0\n")
+            lmpScript.write("bond_coeff 1 30.0  1.5  1.0 1.0\n")
             lmpScript.write("special_bonds fene\n\n")
+            lmpScript.write("minimize              0.00000001 0.000000001 10000 100000\n")
             lmpScript.write("reset_timestep 0\n")
             lmpScript.write("timestep {}\n".format(self.time_step))
             lmpScript.write("fix integrator all nve\n")
@@ -131,6 +131,10 @@ class PolymerSimulation:
             lmpScript.write("compute  cmol all chunk/atom molecule \n")
             lmpScript.write("compute gyr all gyration/chunk cmol \n")
             lmpScript.write("variable  ave equal ave(c_gyr)*{} \n".format(self.sigma0))
+            lmpScript.write("variable KineticEnergy equal ke  \n")
+            lmpScript.write("variable PotentialEnergy equal pe \n")
+            lmpScript.write("variable Temperature equal temp  \n")
+            lmpScript.write("fix             output all ave/time 20 50 1000 v_Temperature v_KineticEnergy v_PotentialEnergy v_ave file "+str(self.filename)+"_thermo_output.dat format %.15g \n\n")
             lmpScript.write("thermo_style  custom step temp etotal press v_ave\n")
             lmpScript.write("thermo 1000 \n")
             lmpScript.write("compute ficoll_msd HS msd \n")
