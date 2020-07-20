@@ -1,6 +1,5 @@
 import numpy as np 
 import os 
-from random import randint 
 
 class PolymerSimulation:
 
@@ -48,13 +47,13 @@ class PolymerSimulation:
 
     def __initialize_polymer_input(self):
         os.system("gfortran "+str(self.pathto)+"/lib/chain.f -o chain")
-        
+
         for i in range(self.num_files):
             with open('def.chain2','w') as fdata:
                 # First line is a comment line 
                 fdata.write('Polymer chain definition\n\n')
                 fdata.write('{}     rhostar\n'.format(self.rho_star))
-                fdata.write('{}     random # seed (8 digits or less)\n'.format(randint(10000, 100000000)))
+                fdata.write('{}     random # seed (8 digits or less)\n'.format(np.random.randint(10000, 100000000)))
                 fdata.write('{}     # of sets of chains (blank line + 6 values for each set)\n'.format(1))
                 fdata.write('{}     molecule tag rule: 0 = by mol, 1 = from 1 end, 2 = from 2 ends\n\n'.format(0))
                 fdata.write('{}     number of chains\n'.format(self.nchain))
@@ -86,7 +85,7 @@ class PolymerSimulation:
                 lmpScript.write("neigh_modify every 2 delay 10 check yes \n\n")
                 lmpScript.write("read_data "+str(self.filename)+"_poly_input_"+str(i)+".data\n\n")
                 lmpScript.write("region box block -{} {} -{} {} -{} {}\n".format(*(self.box_side/2.)*np.ones(6)))
-                lmpScript.write("create_atoms 2 random {} {} box\n\n".format(self.n_hs,randint(10000, 100000000)))
+                lmpScript.write("create_atoms 2 random {} {} box\n\n".format(self.n_hs,np.random.randint(10000, 100000000)))
                 lmpScript.write("mass 1 {}\n".format(self.massA))
                 lmpScript.write("mass 2 {}\n\n".format(self.massB))
                 lmpScript.write("group polymer type 1\n")
@@ -127,7 +126,7 @@ class PolymerSimulation:
                 lmpScript.write("reset_timestep 0\n")
                 lmpScript.write("timestep {}\n".format(self.time_step))
                 lmpScript.write("fix integrator all nve\n")
-                lmpScript.write("fix dynamics all langevin {} {} {} {}\n".format(self.temperature,self.temperature,self.gamma,randint(10000, 100000000)))
+                lmpScript.write("fix dynamics all langevin {} {} {} {}\n".format(self.temperature,self.temperature,self.gamma,np.random.randint(10000, 100000000)))
                 lmpScript.write("thermo_style  custom step temp pe ke etotal press \n")
                 lmpScript.write("thermo 1000 \n")
                 lmpScript.write("run {}\n".format(self.number_of_steps_equilibration))
