@@ -2,6 +2,16 @@ import numpy as np
 import os 
 
 class PolymerSimulation:
+    """
+    Summary or Description of the Function
+
+    Parameters:
+    argument1 (int): Description of arg1
+
+    Returns:
+    int:Returning value
+
+   """
 
     def __init__(self,system_parameters,pathto):
         self.system_parameters = system_parameters
