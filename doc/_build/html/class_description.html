@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Getting started &mdash; Polymer Simulation  documentation</title>
+  <title>Class description &mdash; Polymer Simulation  documentation</title>
   
 
   
@@ -35,8 +35,8 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Class description" href="class_description.html" />
-    <link rel="prev" title="Polymer Simulation’s class documentation" href="index.html" /> 
+    <link rel="next" title="System parameters" href="input_code.html" />
+    <link rel="prev" title="Getting started" href="getting_started.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -84,14 +84,9 @@
             
             
               <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Getting started</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#installing-numpy">Installing NumPy</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#installing-fortran">Installing fortran</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#installing-lammps">Installing LAMMPS</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="class_description.html">Class description</a></li>
-<li class="toctree-l1"><a class="reference internal" href="input_code.html">Input code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting started</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Class description</a></li>
+<li class="toctree-l1"><a class="reference internal" href="input_code.html">System parameters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="output_code.html">Output code</a></li>
 </ul>
 
@@ -138,13 +133,13 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>Getting started</li>
+      <li>Class description</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="_sources/getting_started.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/class_description.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -157,29 +152,26 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="getting-started">
-<span id="id1"></span><h1>Getting started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="installing-numpy">
-<span id="id2"></span><h2>Installing NumPy<a class="headerlink" href="#installing-numpy" title="Permalink to this headline">¶</a></h2>
-<p>To be able to use this class, first one must have NumPy library installed, which is of keen importance to this class.
-If you are using Anaconda, you are safe to proceed. If not, this library can be installed by doing on you’re bash:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip3</span> <span class="n">install</span> <span class="n">numpy</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="installing-fortran">
-<span id="id3"></span><h2>Installing fortran<a class="headerlink" href="#installing-fortran" title="Permalink to this headline">¶</a></h2>
-<p>This class is a result of a python and a fortran joint code. To proceed, we need to install gfortran to be able
-to fully execute this class. To install gfortran on Linux systems, execute the bellow command on you’re bash:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">gfortran</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="installing-lammps">
-<span id="id4"></span><h2>Installing LAMMPS<a class="headerlink" href="#installing-lammps" title="Permalink to this headline">¶</a></h2>
-<p>Since this class generates LAMMPS scripts for polymer simulations, you must have LAMMPS installed on you’re workstation.
-To do this, please, access this <a class="reference external" href="https://lammps.sandia.gov/">link</a>.</p>
-</div>
+  <div class="section" id="module-lammps_generator">
+<span id="class-description"></span><h1>Class description<a class="headerlink" href="#module-lammps_generator" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="lammps_generator.PolymerSimulation">
+<em class="property">class </em><code class="sig-prename descclassname">lammps_generator.</code><code class="sig-name descname">PolymerSimulation</code><span class="sig-paren">(</span><em class="sig-param">system_parameters</em>, <em class="sig-param">pathto</em><span class="sig-paren">)</span><a class="headerlink" href="#lammps_generator.PolymerSimulation" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is the class PolymerSimulation. After specifing the needed system parameters,
+it will execute the chain.f, or chain_alone.f, code for the polymers input generation,
+and then it will write the LAMMPS inputs for running. chain.f is for the case of mixing
+polymers with obstacles, and the chain_alone.f is for when one wants only to simulate
+polymers in empty space.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>system_parameters</strong> – A dictionary with important system parameters.</p></li>
+<li><p><strong>pathto</strong> – A path to the class directory location.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 
 
@@ -190,10 +182,10 @@ To do this, please, access this <a class="reference external" href="https://lamm
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="class_description.html" class="btn btn-neutral float-right" title="Class description" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="input_code.html" class="btn btn-neutral float-right" title="System parameters" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="index.html" class="btn btn-neutral float-left" title="Polymer Simulation’s class documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="getting_started.html" class="btn btn-neutral float-left" title="Getting started" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

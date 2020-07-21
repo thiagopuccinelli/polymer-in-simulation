@@ -1,17 +1,23 @@
 import numpy as np 
 import os 
 
+
 class PolymerSimulation:
     """
-    Summary or Description of the Function
+    This is the class PolymerSimulation. After specifing the needed system parameters, 
+    it will execute the chain.f, or chain_alone.f, code for the polymers input generation, 
+    and then it will write the LAMMPS inputs for running. chain.f is for the case of mixing 
+    polymers with obstacles, and the chain_alone.f is for when one wants only to simulate 
+    polymers in empty space. 
 
-    Parameters:
-    argument1 (int): Description of arg1
 
-    Returns:
-    int:Returning value
-
-   """
+    Parameters
+    ----------
+    system_parameters
+        A dictionary with important system parameters.
+    pathto 
+        A path to the class directory location.
+    """
 
     def __init__(self,system_parameters,pathto):
         self.system_parameters = system_parameters

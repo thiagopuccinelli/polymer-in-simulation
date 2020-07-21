@@ -5,102 +5,32 @@
 Getting started
 ***************
 
-.. _installing-docdir:
+.. _installing-numpy:
 
-Installing your doc directory
+Installing NumPy 
 =============================
 
-You may already have sphinx `sphinx <http://sphinx.pocoo.org/>`_
-installed -- you can check by doing::
+To be able to use this class, first one must have NumPy library installed, which is of keen importance to this class. 
+If you are using Anaconda, you are safe to proceed. If not, this library can be installed by doing on you're bash:: 
 
-  python -c 'import sphinx'
+  pip3 install numpy 
 
-If that fails grab the latest version of and install it with::
+.. _installing-fortran:
 
-  > sudo easy_install -U Sphinx
+Installing fortran
+===================
+This class is a result of a python and a fortran joint code. To proceed, we need to install gfortran to be able 
+to fully execute this class. To install gfortran on Linux systems, execute the bellow command on you're bash::
+  
+  sudo apt-get install gfortran 
 
-Now you are ready to build a template for your docs, using
-sphinx-quickstart::
+.. _installing-lammps:
 
-  > sphinx-quickstart
+Installing LAMMPS
+===================
 
-accepting most of the defaults.  I choose "sampledoc" as the name of my
-project.  cd into your new directory and check the contents::
-
-  home:~/tmp/sampledoc> ls
-  Makefile	_static		conf.py
-  _build		_templates	index.rst
-
-The index.rst is the master ReST for your project, but before adding
-anything, let's see if we can build some html::
-
-  make html
-
-If you now point your browser to :file:`_build/html/index.html`, you
-should see a basic sphinx site.
-
-.. image:: _static/basic_screenshot.png
-
-.. _fetching-the-data:
-
-Fetching the data
------------------
-
-Now we will start to customize out docs.  Grab a couple of files from
-the `web site <https://github.com/matplotlib/sampledoc>`_
-or git.  You will need :file:`getting_started.rst` and
-:file:`_static/basic_screenshot.png`.  All of the files live in the
-"completed" version of this tutorial, but since this is a tutorial,
-we'll just grab them one at a time, so you can learn what needs to be
-changed where.  Since we have more files to come, I'm going to grab
-the whole git directory and just copy the files I need over for now.
-First, I'll cd up back into the directory containing my project, check
-out the "finished" product from git, and then copy in just the files I
-need into my :file:`sampledoc` directory::
-
-  home:~/tmp/sampledoc> pwd
-  /Users/jdhunter/tmp/sampledoc
-  home:~/tmp/sampledoc> cd ..
-  home:~/tmp> git clone https://github.com/matplotlib/sampledoc.git tutorial
-  Cloning into 'tutorial'...
-  remote: Counting objects: 87, done.
-  remote: Compressing objects: 100% (43/43), done.
-  remote: Total 87 (delta 45), reused 83 (delta 41)
-  Unpacking objects: 100% (87/87), done.
-  Checking connectivity... done
-  home:~/tmp> cp tutorial/getting_started.rst sampledoc/
-  home:~/tmp> cp tutorial/_static/basic_screenshot.png sampledoc/_static/
-
-The last step is to modify :file:`index.rst` to include the
-:file:`getting_started.rst` file (be careful with the indentation, the
-"g" in "getting_started" should line up with the ':' in ``:maxdepth``::
-
-  Contents:
-
-  .. toctree::
-     :maxdepth: 2
-
-     getting_started.rst
-
-and then rebuild the docs::
-
-  cd sampledoc
-  make html
+Since this class generates LAMMPS scripts for polymer simulations, you must have LAMMPS installed on you're workstation. 
+To do this, please, access this `link <https://lammps.sandia.gov/>`_. 
 
 
-When you reload the page by refreshing your browser pointing to
-:file:`_build/html/index.html`, you should see a link to the
-"Getting Started" docs, and in there this page with the screenshot.
-`Voila!`
 
-We can also use the image directive in :file:`index.rst` to include to the screenshot above
-with::
-
-  .. image::
-     _static/basic_screenshot.png
-
-
-Next we'll customize the look and feel of our site to give it a logo,
-some custom css, and update the navigation panels to look more like
-the `sphinx <http://sphinx.pocoo.org/>`_ site itself -- see
-:ref:`custom_look`.
