@@ -1,3 +1,6 @@
+
+.. _class_description:
+
 ********************
 Class description
 ********************
