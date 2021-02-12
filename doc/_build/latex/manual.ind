@@ -1,0 +1,14 @@
+\begin{sphinxtheindex}
+\let\bigletter\sphinxstyleindexlettergroup
+\let\spxpagem \sphinxstyleindexpagemain
+\let\spxentry \sphinxstyleindexentry
+\let\spxextra \sphinxstyleindexextra
+
+  \bigletter L
+  \item \spxentry{lammps\_generator}\spxextra{module}, \hyperpage{3}
+
+  \indexspace
+  \bigletter P
+  \item \spxentry{PolymerSimulation}\spxextra{class in lammps\_generator}, \hyperpage{3}
+
+\end{sphinxtheindex}

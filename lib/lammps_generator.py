@@ -193,8 +193,9 @@ class PolymerSimulation:
                     lmpScript.write("compute cc1 all chunk/atom molecule \n")
                     lmpScript.write("compute myChunk all com/chunk cc1 \n")
                     lmpScript.write("fix myCOM all ave/time 100 1 100 c_myChunk[*] file "+str(self.filename)+"_com_poly_"+str(i)+".dat mode vector\n")
-                    lmpScript.write("compute polymer_msd polymer msd \n")
-                    lmpScript.write("fix polymer_msd polymer ave/time 2 6 100 c_polymer_msd[4] file "+str(self.filename)+"_msd_polymer_"+str(i)+".dat\n")
+                    lmpScript.write("compute polymer_msd polymer chunk/atom molecule \n")
+                    lmpScript.write("compute chainMSD polymer msd/chunk polymer_msd  \n")
+                    lmpScript.write("fix polymer_MSDPrint polymer ave/time 1000 1 1000 c_chainMSD[4] file "+str(self.filename)+"_msd_polymer_"+str(i)+".dat mode vector \n")
                     lmpScript.write("run {}".format(self.number_of_steps))
         else:
             for i in range(self.num_files):
@@ -260,6 +261,7 @@ class PolymerSimulation:
                     lmpScript.write("compute cc1 all chunk/atom molecule \n")
                     lmpScript.write("compute myChunk all com/chunk cc1 \n")
                     lmpScript.write("fix myCOM all ave/time 100 1 100 c_myChunk[*] file "+str(self.filename)+"_com_poly_"+str(i)+".dat mode vector\n")
-                    lmpScript.write("compute polymer_msd polymer msd \n")
-                    lmpScript.write("fix polymer_msd polymer ave/time 2 6 100 c_polymer_msd[4] file "+str(self.filename)+"_msd_polymer_"+str(i)+".dat\n")
+                    lmpScript.write("compute polymer_msd polymer chunk/atom molecule \n")
+                    lmpScript.write("compute chainMSD polymer msd/chunk polymer_msd  \n")
+                    lmpScript.write("fix polymer_MSDPrint polymer ave/time 1000 1 1000 c_chainMSD[4] file "+str(self.filename)+"_msd_polymer_"+str(i)+".dat mode vector \n")
                     lmpScript.write("run {}".format(self.number_of_steps))
