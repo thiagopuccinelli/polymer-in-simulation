@@ -18,7 +18,9 @@ system_parameters = {
     "phi_hs": 0.01,
     "filename": "rho_0_004_phi_hs_0_05",
     "num_files":    5,
-    "type_simulation": True
+    "type_simulation": True,
+    "number_of_steps": 10000,
+    "number_of_steps_equilibration": 10000
 }
         
 simulation = PolymerSimulation(system_parameters,pathto)

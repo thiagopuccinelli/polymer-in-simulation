@@ -57,8 +57,9 @@ class PolymerSimulation:
         self.gamma = 1.0 
         self.time_step = 0.001 
         self.bin = 1.0 
-        self.number_of_steps = 10000000
-        self.number_of_steps_equilibration = 2000000
+        self.number_of_steps = self.system_parameters["number_of_steps"]
+        self.number_of_steps_equilibration = self.system_parameters["number_of_steps_equilibration"]
+        self.low_attraction = self.system_parameters["low_attraction"] 
         self.npart_tot = self.nchain*self.nmonomers + self.n_hs
 
 
@@ -230,9 +231,10 @@ class PolymerSimulation:
                     lmpScript.write("unfix equilibrate2 \n")
                     lmpScript.write("# stop minimization \n")
                     lmpScript.write("#########################################\n")
-                    lmpScript.write("pair_style  lj/cut {} \n\n".format(self.cut11))
-                    lmpScript.write("pair_coeff      1 1 {} {} {}\n".format(self.epsAA,self.sigmaAA,self.cut11))
+                    lmpScript.write("pair_style hybrid/overlay lj/cut {} lj/cut {} \n\n".format(self.cut11, 2.5))
+                    lmpScript.write("pair_coeff      1 1 lj/cut 1 {} {} {}\n".format(self.epsAA,self.sigmaAA,self.cut11))
                     lmpScript.write("pair_modify  shift yes\n\n")
+                    lmpScript.write("pair_coeff      1 1 lj/cut 2 {} 1.0 2.5 \n\n".format(self.low_attraction))
                     lmpScript.write("bond_style  fene \n")
                     lmpScript.write("bond_coeff 1 30.0  1.5  1.0 1.0\n")
                     lmpScript.write("special_bonds fene\n\n")
